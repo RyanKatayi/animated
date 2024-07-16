@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #f7f7f7;
+}
+
+.background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+.layer {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    will-change: transform, background, border-radius;
+    transition: transform 0.5s, background 1s, border-radius 0.5s;
+}
+
+.layer1 {
+    background: radial-gradient(circle, #ff7e5f, #feb47b);
+    transform: translateZ(-1px) scale(2);
+}
+
+.layer2 {
+    background: radial-gradient(circle, #ff6f61, #ffb3ba);
+    transform: translateZ(-0.5px) scale(1.5);
+}
+
+.layer3 {
+    background: radial-gradient(circle, #ffcccb, #feb47b);
+    transform: translateZ(0) scale(1);
+}
