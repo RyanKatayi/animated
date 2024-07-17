@@ -1,33 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const layers = document.querySelectorAll('.layer');
-    const colors = [
-        'radial-gradient(circle, #ff7e5f, #feb47b)',
-        'radial-gradient(circle, #ff6f61, #ffb3ba)',
-        'radial-gradient(circle, #ffcccb, #feb47b)',
-        'radial-gradient(circle, #56ab2f, #a8e063)',
-        'radial-gradient(circle, #36d1dc, #5b86e5)'
-    ];
-    let colorIndex = 0;
+    const balloonsContainer = document.querySelector('.balloons');
+    const colors = ['#ff7e5f', '#feb47b', '#ff6f61', '#ffb3ba', '#ffcccb', '#36d1dc', '#5b86e5'];
 
-    document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) - 0.5;
-        const y = (e.clientY / window.innerHeight) - 0.5;
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.left = `${Math.random() * 100}%`;
 
-        layers.forEach((layer, index) => {
-            const depth = index * -0.5;
-            const movementX = x * 20 * (index + 1);
-            const movementY = y * 20 * (index + 1);
+        balloonsContainer.appendChild(balloon);
 
-            layer.style.transform = `translate3d(${movementX}px, ${movementY}px, ${depth}px) scale(${1 + (depth / 2)})`;
-        });
-    });
+        setTimeout(() => {
+            balloon.remove();
+        }, 5000); // Remove balloon after it pops
+    }
 
-    document.addEventListener('click', () => {
-        layers.forEach((layer) => {
-            colorIndex = (colorIndex + 1) % colors.length;
-            layer.style.background = colors[colorIndex];
-            layer.style.transform += ' rotate(360deg)';
-            layer.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        });
-    });
+    // Create a new balloon every 1 second
+    setInterval(createBalloon, 1000);
 });
